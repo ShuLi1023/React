@@ -31,3 +31,7 @@ address{
 .navbar-dark {
     background-color: #512DA8;
 }
+
+a.media-left{
+    padding:0px 30px 70px 30px;
+}
