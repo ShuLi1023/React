@@ -7,8 +7,10 @@ import {
   CardTitle,
   Breadcrumb,
   BreadcrumbItem,
+  Button
 } from "reactstrap";
 import { Link } from "react-router-dom";
+import Comment from "./CommentForm"
 
 function RenderDish({ dish }) {
   if (dish != null)
@@ -45,7 +47,9 @@ function RenderComments({ comments }) {
       <div>
         <h4>Comments</h4>
         <ul className="list-unstyled">{cmts}</ul>
+        <Comment />
       </div>
+      
     );
   } else return <div></div>;
 }
@@ -68,6 +72,7 @@ const DishDetail = (props) => {
         </div>
         <div className="col-12 col-md-5 m-1">
           <RenderComments comments={props.comments} />
+          
         </div>
       </div>
     </div>
