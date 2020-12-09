@@ -10,7 +10,7 @@ class Comment extends Component{
     constructor(props){
         super(props)
         this.state = {
-            rating: 1,
+            rating: "1",
             name: '',
             comment: '',
             isModalOpen:false
@@ -38,8 +38,7 @@ class Comment extends Component{
 
     handleSubmit(values){
         this.toggleModal();
-        alert('Current State is: ' + JSON.stringify(values));
-        //event.preventDefault();
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment)
     }
 
     render() {

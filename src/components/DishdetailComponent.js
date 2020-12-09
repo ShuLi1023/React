@@ -14,6 +14,7 @@ import Comment from "./CommentForm"
 function RenderDish({ dish }) {
   if (dish != null)
     return (
+      <div className="col-12 col-md-5 m-1">
       <Card>
         <CardImg top src={dish.image} alt={dish.name} />
         <CardBody>
@@ -21,11 +22,12 @@ function RenderDish({ dish }) {
           <CardText>{dish.description}</CardText>
         </CardBody>
       </Card>
+      </div>
     );
   else return <div></div>;
 }
 
-function RenderComments({ comments }) {
+function RenderComments({ comments, addComment, dishId }) {
   if (comments != null) {
     const cmts = comments.map((cmt) => {
       return (
@@ -43,10 +45,11 @@ function RenderComments({ comments }) {
       );
     });
     return (
-      <div>
+      <div className="col-12 col-md-5 m-1">
         <h4>Comments</h4>
         <ul className="list-unstyled">{cmts}</ul>
-        <Comment />
+        <Comment dishId={dishId} addComment={addComment}/>
+
       </div>
       
     );
@@ -66,12 +69,11 @@ const DishDetail = (props) => {
           <h3>{props.dish.name}</h3>
           <hr />
         </div>
-        <div className="col-12 col-md-5 m-1">
+        <div className="row">
           <RenderDish dish={props.dish} />
-        </div>
-        <div className="col-12 col-md-5 m-1">
-          <RenderComments comments={props.comments} />
-          
+          <RenderComments comments={props.comments}
+          addComment={props.addComment}
+          dishId={props.dish.id} />
         </div>
       </div>
     </div>
