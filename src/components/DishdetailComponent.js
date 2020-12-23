@@ -12,10 +12,15 @@ import { Link } from "react-router-dom";
 import Comment from "./CommentForm";
 import { Loading } from "./LoadingComponent";
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components'
 
 function RenderDish({dish}) {
     return (
       <div className="col-12 col-md-5 m-1">
+        <FadeTransform in 
+            transformProps={{
+              exitTransform: 'scale(0.5) translate'
+            }}>
         <Card>
           <CardImg top src={baseUrl + dish.image} alt={dish.name} />
           <CardBody>
@@ -23,6 +28,7 @@ function RenderDish({dish}) {
             <CardText>{dish.description}</CardText>
           </CardBody>
         </Card>
+        </FadeTransform>
       </div>
     );
 }
@@ -31,6 +37,7 @@ function RenderComments({ comments, postComment, dishId }) {
   if (comments != null) {
     const cmts = comments.map((cmt) => {
       return (
+        <Fade in>
         <li key={cmt.id}>
           <p className="list-item">{cmt.comment}</p>
           <p className="list-item">
@@ -42,13 +49,16 @@ function RenderComments({ comments, postComment, dishId }) {
             }).format(new Date(cmt.date))}
           </p>
         </li>
+        </Fade>
       );
     });
     return (
       <div className="col-12 col-md-5 m-1">
         <h4>Comments</h4>
         <ul className="list-unstyled">{cmts}</ul>
+        <Stagger in>
         <Comment dishId={dishId} postComment={postComment} />
+        </Stagger>
       </div>
     );
   } else return <div></div>;
